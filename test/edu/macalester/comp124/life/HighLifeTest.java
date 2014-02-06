@@ -7,16 +7,16 @@ import static org.junit.Assert.*;
 
 /**
  * Test cases for the Conway ruleset
- * @author Michael Ekstrand <ekstrand@cs.umn.edu>
  *
+ * @author Michael Ekstrand <ekstrand@cs.umn.edu>
  */
-public class ConwayTest {
+public class HighLifeTest {
 
     private RuleSet rules;
 
     /**
      * Initial setup method for the test cases.
-     *
+     * <p/>
      * If a JUnit test class has a method called setUp, then JUnit calls that
      * method before each of the test methods. It allows you to specify initial
      * actions to be taken for every test. In this case, we start each test with
@@ -25,12 +25,11 @@ public class ConwayTest {
     @Before
     public void setUp() throws Exception {
         // create a new rule set
-        rules = new Conway();
+        rules = new HighLife();
     }
 
     /**
      * Test that an all-dead neighborhood results in the cell staying dead.
-     *
      */
     @Test
     public void testNoOp() {
@@ -40,11 +39,11 @@ public class ConwayTest {
 
     /**
      * Test that 3 neighbors bring a cell to edu.macalester.comp124.life.
-     *
      */
     @Test
     public void testComeToLife() {
         assertTrue(rules.applyRules(false, 3));
+        assertTrue(rules.applyRules(false, 6));
     }
 
     /**
@@ -55,13 +54,12 @@ public class ConwayTest {
     public void testStayDead() {
         assertFalse(rules.applyRules(false, 2));
         assertFalse(rules.applyRules(false, 4));
-        assertFalse(rules.applyRules(false, 6));
+        assertFalse(rules.applyRules(false, 5));
         assertFalse(rules.applyRules(false, 8));
     }
 
     /**
      * Test that 2 or 3 neighbors keep a cell alive.
-     *
      */
     @Test
     public void testStayAlive() {
@@ -71,7 +69,6 @@ public class ConwayTest {
 
     /**
      * Test that a cell with 0 or 1 neighbors dies.
-     *
      */
     @Test
     public void testLonely() {
@@ -81,12 +78,11 @@ public class ConwayTest {
 
     /**
      * Test that a cell with 4 or more neighbors dies.
-     *
+     * <p/>
      * We use representative samples of the domain of applyRules. In this simple
      * case, it would be feasible to exhaustively test every possible case for
      * applyRules, but in most programs exhaustive testing is not possible given
      * the limits of computer speed.
-     *
      */
     @Test
     public void testOvercrowd() {
